@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 var VENDOR_LIBS = [
   'react', 'lodash','redux', 'react-redux','react-dom','faker','react-input-range','redux-form','redux-thunk'
@@ -26,5 +27,14 @@ module.exports = {
         test: /\.css/,
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      hash: true
+    })
+  ]
 };
